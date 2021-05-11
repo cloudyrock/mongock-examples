@@ -1,10 +1,13 @@
-package com.github.cloudyrock.mongock.examples;
+package aux;
 
 
+import com.github.cloudyrock.mongock.examples.Spring5SpringData3App;
 import com.github.cloudyrock.mongock.examples.client.ClientRepository;
 import com.github.cloudyrock.mongock.examples.spring.DateToZonedDateTimeConverter;
 import com.github.cloudyrock.mongock.examples.spring.ZonedDateTimeToDateConverter;
 import com.github.cloudyrock.springboot.v2_2.EnableMongock;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.Bean;
@@ -16,38 +19,27 @@ import org.springframework.web.client.RestTemplate;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Using @EnableMongock with minimal configuration only requires changeLog package to scan
- * in property file
- */
-@EnableMongock
-@SpringBootApplication
-@EnableMongoRepositories(basePackageClasses = ClientRepository.class)
-public class Spring5SpringData3App {
 
-    public final static String CLIENTS_COLLECTION_NAME = "clientCollection";
+@SpringBootApplication
+public class Spring5SpringData3AppAux implements CommandLineRunner {
+
 
     public static void main(String[] args) {
-        System.out.println("\n\n\nCALLING THE NORMAL MAIN\n\n\n\n");
+        System.out.println("\n\n\nCALLING THE AUX MAIN\n\n\n\n");
         getSpringAppBuilder().run(args);
     }
 
 
     public static SpringApplicationBuilder getSpringAppBuilder() {
-        return new SpringApplicationBuilder().sources(Spring5SpringData3App.class);
+        return new SpringApplicationBuilder()
+                .web(WebApplicationType.NONE)
+                .sources(Spring5SpringData3AppAux.class, Spring5SpringData3App.class);
     }
 
-
-    @Bean
-    public RestTemplate restTemplate() {
-        return new RestTemplate();
-    }
-
-    @Bean
-    public MongoCustomConversions customConversions() {
-        List<Converter<?, ?>> converters = new ArrayList<>();
-        converters.add(DateToZonedDateTimeConverter.INSTANCE);
-        converters.add(ZonedDateTimeToDateConverter.INSTANCE);
-        return new MongoCustomConversions(converters);
+    @Override
+    public void run(String... args) throws Exception {
+        System.out.println("\n\n\nMONGOCK CLI\n\n\n\n");
+        int read = System.in.read();
+        System.out.println("INPUT: " + read);
     }
 }

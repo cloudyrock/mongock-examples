@@ -5,5 +5,3 @@ mongock:
   mongo-db:
     read-concern: local
 
-
-
