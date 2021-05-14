@@ -1,0 +1,3 @@
+mongock:
+  cli:
+    config-classes: com.github.cloudyrock.mongock.examples.Spring5SpringData3App.class

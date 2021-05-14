@@ -4,23 +4,23 @@ package com.github.cloudyrock.mongock.examples;
 import com.github.cloudyrock.mongock.examples.client.ClientRepository;
 import com.github.cloudyrock.mongock.examples.spring.DateToZonedDateTimeConverter;
 import com.github.cloudyrock.mongock.examples.spring.ZonedDateTimeToDateConverter;
-import com.github.cloudyrock.springboot.v2_2.EnableMongock;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.data.mongodb.core.convert.MongoCustomConversions;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
+
+//import com.github.cloudyrock.springboot.EnableMongock;
 
 /**
  * Using @EnableMongock with minimal configuration only requires changeLog package to scan
  * in property file
  */
-@EnableMongock
+//@EnableMongock
 @SpringBootApplication
 @EnableMongoRepositories(basePackageClasses = ClientRepository.class)
 public class Spring5SpringData3App {
@@ -37,11 +37,6 @@ public class Spring5SpringData3App {
         return new SpringApplicationBuilder().sources(Spring5SpringData3App.class);
     }
 
-
-    @Bean
-    public RestTemplate restTemplate() {
-        return new RestTemplate();
-    }
 
     @Bean
     public MongoCustomConversions customConversions() {

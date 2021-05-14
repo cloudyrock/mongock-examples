@@ -1,0 +1,6 @@
+#!/bin/sh
+#Just an small POC as script to be provide to the user
+
+
+  mvn clean install -Pmongock-cli
+  java -jar target/spring5-springdata3-1.0-SNAPSHOT.jar "$@"
